@@ -1,0 +1,13 @@
+#ifndef AISD_AMGRAPH
+#define AISD_AMGRAPH
+
+#include <algorithms.hpp>
+#include <amgraph.hpp>
+#include <elgraph.hpp>
+#include <gmgraph.hpp>
+#include <ilgraph.hpp>
+#include <ilgraph.hpp>
+#include <imgraph.hpp>
+#include <splgraph.hpp>
+
+#endif //AISD_AMGRAPH
