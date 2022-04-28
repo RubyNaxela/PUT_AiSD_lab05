@@ -27,19 +27,24 @@ namespace gr {
         }
 
         ///
-        /// \return whether there is an edge between vertices of the specified indices
+        /// \return the first independent vertex of this graph
         ///
-        [[nodiscard]] virtual bool connected(int, int) const = 0;
+        [[nodiscard]] virtual int find_independent() const = 0;
 
         ///
-        /// \return vector of indices of all vertices adjacent to the vertex of the specified index
+        /// \brief Removes the specified vertex from this graph.
         ///
-        [[nodiscard]] virtual std::vector<int> adjacent_nodes(int) const = 0;
+        virtual void remove_vertex(int) = 0;
 
         ///
-        /// \return all edges of this graph
+        /// \return vector of all successors of the specified vertex
         ///
-        [[nodiscard]] virtual std::vector<std::pair<int, int>> all_edges() const = 0;
+        [[nodiscard]] virtual std::vector<int> successors(int) const = 0;
+
+        ///
+        /// \return all vertices of this graph
+        ///
+        [[nodiscard]] virtual std::vector<int> all_vertices() const = 0;
     };
 }
 
