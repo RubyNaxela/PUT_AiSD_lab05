@@ -5,9 +5,9 @@
 
 namespace gr {
 
-    struct edges_list_graph : graph {
+    struct edges_list_graph : int_graph {
 
-        edges_list_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        edges_list_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
         [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
             for (int i = 0; i < this->size_rows(); i++)
@@ -17,7 +17,7 @@ namespace gr {
             return false;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 
@@ -26,9 +26,9 @@ namespace gr {
         }
     };
 
-    struct edges_list_dir_graph : graph {
+    struct edges_list_dir_graph : int_graph {
 
-        edges_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        edges_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
         [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
             for (int i = 0; i < this->size_rows(); i++)
@@ -36,7 +36,7 @@ namespace gr {
             return false;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 

@@ -5,15 +5,15 @@
 
 namespace gr {
 
-    struct incidency_list_dir_graph : graph {
+    struct incidency_list_dir_graph : int_graph {
 
-        incidency_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        incidency_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
         [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
             return false;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 

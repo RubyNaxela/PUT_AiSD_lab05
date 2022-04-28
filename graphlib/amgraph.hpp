@@ -8,15 +8,15 @@
 
 namespace gr {
 
-    struct adjacency_matrix_graph : graph {
+    struct adjacency_matrix_graph : int_graph {
 
-        adjacency_matrix_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        adjacency_matrix_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
         [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
             return (*this)[vertex1][vertex2] == 1;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 
@@ -25,11 +25,11 @@ namespace gr {
         }
     };
 
-    struct adjacency_matrix_dir_graph : graph {
+    struct adjacency_matrix_dir_graph : int_graph {
 
-        adjacency_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        adjacency_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
-        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {}
+        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : int_graph(__init) {}
 
         ///
         /// \brief Creates a random adjacency matrix representation of a directed graph.
@@ -67,7 +67,7 @@ namespace gr {
             return (*this)[vertex1][vertex2] == 1;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 

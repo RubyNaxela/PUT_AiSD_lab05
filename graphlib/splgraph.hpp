@@ -20,11 +20,11 @@ namespace gr {
         return false;
     }
 
-    struct successors_list_dir_graph : graph {
+    struct successors_list_dir_graph : int_graph {
 
-        successors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        successors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
-        explicit successors_list_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+        explicit successors_list_dir_graph(const std::vector<std::vector<int>>& __init) : int_graph(__init) {}
 
         static successors_list_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
             std::vector<std::vector<int>> list_vec(matrix.size_rows());
@@ -43,7 +43,7 @@ namespace gr {
             return false;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 
@@ -52,12 +52,11 @@ namespace gr {
         }
     };
 
+    struct predecessors_list_dir_graph : int_graph {
 
-    struct predecessors_list_dir_graph : graph {
+        predecessors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
 
-        predecessors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
-
-        explicit predecessors_list_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+        explicit predecessors_list_dir_graph(const std::vector<std::vector<int>>& __init) : int_graph(__init) {}
 
         static predecessors_list_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
             std::vector<std::vector<int>> list_vec(matrix.size_rows());
@@ -76,7 +75,7 @@ namespace gr {
             return false;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int) const override {
+        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
             return {};
         }
 
