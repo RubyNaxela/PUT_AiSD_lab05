@@ -5,9 +5,9 @@
 
 namespace gr {
 
-    struct graph_matrix_dir_graph : int_graph {
+    struct graph_matrix_dir_graph : graph {
 
-        graph_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
+        graph_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
         [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
             return false;

@@ -9,6 +9,8 @@ namespace gr {
         for (const auto& x : __vec) ss << x << " ";
         return ss.str();
     }
+
+#define scan(collection) (collection).begin(), (collection).end()
 }
 
 #endif //AISD_UTIL_HPP

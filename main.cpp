@@ -7,6 +7,8 @@ int main() {
 
     /*
 
+     */
+
     // SORTOWANIE ALGORYTMEM KAHNA (BFS)
 
     auto adjm = gr::adjacency_matrix_dir_graph::random(6, 0.67);
@@ -15,10 +17,9 @@ int main() {
     auto plist = gr::predecessors_list_dir_graph::from_adjacency_matrix(adjm);
     std::cout << "LISTA OF POPRZEDNIKI\n" << plist << std::endl;
 
-    auto sorted = gr::sort_bfs(adjm);
+     auto sorted = gr::sort_bfs(plist);
+//    auto sorted = gr::sort_bfs_adjm(adjm);
     std::cout << "POSORTED WITH BFS\n" << gr::vec_str(sorted);
-
-     */
 
     // SORTOWANIE ALGORYTMEM DFS
 

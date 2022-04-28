@@ -9,34 +9,38 @@
 
 namespace gr {
 
-    template<typename _Tp>
-    struct graph : gr::matrix<_Tp> {
+    struct graph : gr::matrix<int> {
 
-        graph(const std::initializer_list<std::vector<_Tp>>& __init) : gr::matrix<_Tp>(__init) {}
+        graph(const std::initializer_list<std::vector<int>>& __init) : gr::matrix<int>(__init) {}
 
-        explicit graph(const std::vector<std::vector<_Tp>>& __init) : gr::matrix<_Tp>(__init) {}
+        explicit graph(const std::vector<std::vector<int>>& __init) : gr::matrix<int>(__init) {}
 
-        explicit graph(const gr::matrix<_Tp>& __init) : gr::matrix<_Tp>(__init) {}
+        explicit graph(const gr::matrix<int>& __init) : gr::matrix<int>(__init) {}
 
         virtual ~graph() = default;
 
         ///
+        /// \return whether this graph contains any vertices
+        ///
+        [[nodiscard]] bool empty() const {
+            return this->size_rows() == 0;
+        }
+
+        ///
         /// \return whether there is an edge between vertices of the specified indices
         ///
-        [[nodiscard]] virtual bool connected(_Tp, _Tp) const = 0;
+        [[nodiscard]] virtual bool connected(int, int) const = 0;
 
         ///
         /// \return vector of indices of all vertices adjacent to the vertex of the specified index
         ///
-        [[nodiscard]] virtual std::vector<_Tp> adjacent_nodes(_Tp) const = 0;
+        [[nodiscard]] virtual std::vector<int> adjacent_nodes(int) const = 0;
 
         ///
-        /// \return all edges of the inc
+        /// \return all edges of this graph
         ///
-        [[nodiscard]] virtual std::vector<std::pair<_Tp, _Tp>> all_edges() const = 0;
+        [[nodiscard]] virtual std::vector<std::pair<int, int>> all_edges() const = 0;
     };
-
-    typedef graph<int> int_graph;
 }
 
 #endif //AISD_GRAPH_HPP
