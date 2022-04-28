@@ -15,19 +15,16 @@ int main() {
     auto plist = gr::predecessors_list_dir_graph::from_adjacency_matrix(adjm);
     std::cout << "LISTA OF POPRZEDNIKI\n" << plist << std::endl;
 
-    auto sorted = plist.sort_bfs();
+    auto sorted = gr::sort_bfs(adjm);
     std::cout << "POSORTED WITH BFS\n" << gr::vec_str(sorted);
 
      */
-
-    auto adjm = gr::adjacency_matrix_dir_graph::random(6, 0.67);
-    std::cout << "MEJTRIX\n" << adjm << std::endl;
-    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(gr::sort_bfs(adjm));
 
     // SORTOWANIE ALGORYTMEM DFS
 
 //    auto adjm = gr::adjacency_matrix_dir_graph::random(6, 0.67);
 //    std::cout << "MEJTRIX\n" << adjm << std::endl;
+//    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs(adjm));
 
     /*
     /// Macierz somsiedztwa

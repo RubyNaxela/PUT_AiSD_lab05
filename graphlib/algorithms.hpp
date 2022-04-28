@@ -24,15 +24,14 @@ namespace gr {
         return vertices;
     }
 
-    struct node {
-        int vertex;
-        char state;
-    };
-
     std::vector<int> sort_dfs(const adjacency_matrix_dir_graph& matrix) {
 
         auto plist = gr::predecessors_list_dir_graph::from_adjacency_matrix(matrix);
-        auto slist = gr::successors_list_dir_graph::from_adjacency_matrix(matrix);
+        auto slist = gr::successors_list_dir_graph::from_adjacency_matrix(matrix).stateful();
+
+        std::cout << "SORTINK WITH DFS\n" << slist << std::endl;
+
+        return {};
     }
 }
 
