@@ -9,5 +9,6 @@
 #include <ilgraph.hpp>
 #include <imgraph.hpp>
 #include <splgraph.hpp>
+#include <util.hpp>
 
 #endif //AISD_AMGRAPH

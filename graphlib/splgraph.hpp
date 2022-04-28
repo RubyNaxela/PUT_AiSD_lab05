@@ -7,19 +7,6 @@
 
 namespace gr {
 
-    template<typename _Tp>
-    std::string vec_str(const std::vector<_Tp>& __vec) {
-        std::stringstream ss;
-        for (const auto& x : __vec) ss << x << " ";
-        return ss.str();
-    }
-
-    template<typename _Tp>
-    bool contains_any(const std::vector<_Tp>& vec1, const std::vector<_Tp>& vec2) {
-        for (const auto& x : vec1) for (const auto& y : vec2) if (x == y) return true;
-        return false;
-    }
-
     struct successors_list_dir_graph : int_graph {
 
         successors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : int_graph(__init) {}
