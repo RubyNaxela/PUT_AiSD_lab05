@@ -45,8 +45,16 @@ namespace gr {
             return matrix_vector[n];
         }
 
-        void erase_row(const_iterator n) {
-            matrix_vector.erase(n);
+        void erase_row(const_iterator it) {
+            matrix_vector.erase(it);
+        }
+
+        void erase_row(size_t index) {
+            matrix_vector.erase(matrix_vector.begin() + index);
+        }
+
+        void erase_column(size_t index) {
+            for (auto& row : *this) row.erase(row.begin() + index);
         }
 
         [[nodiscard]] size_t size_rows() const {
