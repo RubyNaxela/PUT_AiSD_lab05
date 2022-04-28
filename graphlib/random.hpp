@@ -1,6 +1,7 @@
 #ifndef AISD_RANDOM_HPP
 #define AISD_RANDOM_HPP
 #pragma ide diagnostic ignored "cert-err58-cpp"
+#pragma ide diagnostic ignored "cert-msc51-cpp"
 #pragma ide diagnostic ignored "cert-msc32-c"
 
 #include <ctime>
