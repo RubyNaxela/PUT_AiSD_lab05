@@ -9,15 +9,56 @@ namespace gr {
 
         graph_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
-        [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
-            return false;
+        explicit graph_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+
+        static graph_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
+            std::vector<std::vector<int>> successors_list(matrix.size_rows());
+            std::vector<std::vector<int>> predecessors_list(matrix.size_rows());
+            std::vector<std::vector<int>> no_incidence_list(matrix.size_rows());
+            for (int i = 0; i < matrix.size_rows(); i++) {
+                successors_list[i].push_back(i);
+                for (int j = 0; j < matrix.size_cols(); j++) {
+                    if (matrix[i][j] == 1) {
+                        successors_list[i].push_back(j);
+                    }
+                }
+            }
+            for (int i = 0; i < matrix.size_rows(); i++) {
+                predecessors_list[i].push_back(i);
+                for (int j = 0; j < matrix.size_cols(); j++) {
+                    if (matrix[i][j] == -1) {
+                        predecessors_list[i].push_back(j);
+                    }
+                }
+            }
+            for (int i = 0; i < matrix.size_rows(); i++) {
+                no_incidence_list[i].push_back(i);
+                for (int j = 0; j < matrix.size_cols(); j++) {
+                    if (matrix[i][j] == 0) {
+                        no_incidence_list[i].push_back(j);
+                    }
+                }
+            }
+            std::vector<std::vector<int>> graph_matrix;
+
+
+
+            return graph_matrix_dir_graph(graph_matrix);
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
+        [[nodiscard]] int find_independent() const override {
+            return -1;
+        }
+
+        void remove_vertex(int vertex) override {
+
+        }
+
+        [[nodiscard]] std::vector<int> successors(int vertex) const override {
             return {};
         }
 
-        [[nodiscard]] std::vector<std::pair<int, int>> all_edges() const override {
+        [[nodiscard]] std::vector<int> all_vertices() const override {
             return {};
         }
     };

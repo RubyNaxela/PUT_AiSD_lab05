@@ -2,6 +2,9 @@
 #ifndef AISD_SPLGRAPH_HPP
 #define AISD_SPLGRAPH_HPP
 
+#include <map>
+#include <numeric>
+#include <set>
 #include <amgraph.hpp>
 #include <graph.hpp>
 #include <util.hpp>
@@ -27,16 +30,31 @@ namespace gr {
             return successors_list_dir_graph(list_vec);
         }
 
-        [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
-            return false;
+        [[nodiscard]] int find_independent() const override {
+            std::set<int> successors;
+            for (const auto& row : *this) for (int i = 1; i < row.size(); i++) successors.insert(row[i]);
+            for (int vertex : this->all_vertices()) if (not successors.contains(vertex)) return vertex;
+            return -1;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
-            return {};
+        void remove_vertex(int vertex) override {
+            for (auto row = this->begin(); row != this->end(); row++) {
+                if ((*row)[0] == vertex) this->erase_row(row--);
+                std::erase_if(*row, [&](int x) { return x == vertex; });
+            }
         }
 
-        [[nodiscard]] std::vector<std::pair<int, int>> all_edges() const override {
-            return {};
+        [[nodiscard]] std::vector<int> successors(int vertex) const override {
+            std::vector<int> successors;
+            const std::vector<int>& row = (*this)[vertex];
+            for (int i = 1; i < row.size(); i++) successors.push_back(row[i]);
+            return successors;
+        }
+
+        [[nodiscard]] std::vector<int> all_vertices() const override {
+            std::vector<int> vertices;
+            for (const auto& row : *this) vertices.push_back(row[0]);
+            return vertices;
         }
     };
 
@@ -59,27 +77,28 @@ namespace gr {
             return predecessors_list_dir_graph(list_vec);
         }
 
-        [[nodiscard]] int find_independent() const {
+        [[nodiscard]] int find_independent() const override {
             return (*std::find_if(scan(*this), [&](const auto& row) { return row.size() == 1; }))[0];
         }
 
-        void remove_vertex(int vertex) {
+        void remove_vertex(int vertex) override {
             for (auto row = this->begin(); row != this->end(); row++) {
                 if ((*row)[0] == vertex) this->erase_row(row--);
                 std::erase_if(*row, [&](int x) { return x == vertex; });
             }
         }
 
-        [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
-            return false;
+        [[nodiscard]] std::vector<int> successors(int vertex) const override {
+            std::vector<int> successors;
+            for (const auto& row : *this)
+                if (row[0] != vertex and std::count(scan(row), vertex) > 0) successors.push_back(row[0]);
+            return successors;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
-            return {};
-        }
-
-        [[nodiscard]] std::vector<std::pair<int, int>> all_edges() const override {
-            return {};
+        [[nodiscard]] std::vector<int> all_vertices() const override {
+            std::vector<int> vertices;
+            for (const auto& row : *this) vertices.push_back(row[0]);
+            return vertices;
         }
     };
 }

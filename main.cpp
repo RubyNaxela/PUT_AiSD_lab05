@@ -5,27 +5,25 @@ int main() {
 
     gr::enable_bool_string();
 
-    /*
+    auto amatrix = gr::adjacency_matrix_dir_graph::random(6, 0.67);
+    std::cout << "DŻENEREJTED MEJTRIX SOMSIEDZTWA\n" << amatrix << std::endl;
+    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(gr::sort_bfs((amatrix))) << std::endl;
+    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs((amatrix))) << std::endl << std::endl;
 
-     */
-
-    // SORTOWANIE ALGORYTMEM KAHNA (BFS)
-
-    auto adjm = gr::adjacency_matrix_dir_graph::random(6, 0.67);
-    std::cout << "MEJTRIX\n" << adjm << std::endl;
-
-    auto plist = gr::predecessors_list_dir_graph::from_adjacency_matrix(adjm);
+    auto slist = gr::successors_list_dir_graph::from_adjacency_matrix(amatrix);
+    std::cout << "LISTA OF NASTEMPNIKI\n" << slist << std::endl;
+    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(gr::sort_bfs((slist))) << std::endl;
+    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs((slist))) << std::endl << std::endl;
+//
+    auto plist = gr::predecessors_list_dir_graph::from_adjacency_matrix(amatrix);
     std::cout << "LISTA OF POPRZEDNIKI\n" << plist << std::endl;
+    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(gr::sort_bfs((plist))) << std::endl;
+    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs((plist))) << std::endl << std::endl;
 
-     auto sorted = gr::sort_bfs(plist);
-//    auto sorted = gr::sort_bfs_adjm(adjm);
-    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(sorted);
-
-    // SORTOWANIE ALGORYTMEM DFS
-
-//    auto adjm = gr::adjacency_matrix_dir_graph::random(6, 0.67);
-//    std::cout << "MEJTRIX\n" << adjm << std::endl;
-//    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs(adjm));
+    auto imatrix = gr::incidence_matrix_dir_graph::from_adjacency_matrix(amatrix);
+    std::cout << "MEJTRIX INCYDENCJI\n" << imatrix << "\n";
+    std::cout << "POSORTED WITH BFS\n" << gr::vec_str(gr::sort_bfs((imatrix))) << std::endl;
+    std::cout << "POSORTED WITH DFS\n" << gr::vec_str(gr::sort_dfs((imatrix))) << std::endl << std::endl;
 
     /*
     /// Macierz somsiedztwa

@@ -5,8 +5,6 @@
 #include <amgraph.hpp>
 #include <elgraph.hpp>
 #include <gmgraph.hpp>
-#include <ilgraph.hpp>
-#include <ilgraph.hpp>
 #include <imgraph.hpp>
 #include <splgraph.hpp>
 #include <util.hpp>

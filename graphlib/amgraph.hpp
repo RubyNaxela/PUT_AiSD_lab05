@@ -5,20 +5,35 @@
 #include <numeric>
 #include <graph.hpp>
 #include <random.hpp>
+#include <util.hpp>
 
 namespace gr {
 
     struct adjacency_matrix_dir_graph : graph {
 
-        adjacency_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+    private:
 
-        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {}
+        std::vector<int> header;
+
+        [[nodiscard]] int index_of(int vertex) const {
+            return int(std::find(scan(header), vertex) - header.begin());
+        }
+
+    public:
+
+        adjacency_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
+            for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
+        }
+
+        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
+            for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
+        }
 
         ///
         /// \brief Creates a random adjacency matrix representation of a directed acyclic graph.
         /// \param vertices the number of vertices in the graph
         /// \param fill the degree of fill
-        /// \return
+        /// \return a random DAG adjacency matrix
         ///
         static adjacency_matrix_dir_graph random(int vertices, float fill) {
             std::vector<std::vector<int>> vec(vertices);
@@ -46,16 +61,38 @@ namespace gr {
             return adjacency_matrix_dir_graph(matrix);
         }
 
-        [[nodiscard]] bool connected(int vertex1, int vertex2) const override {
-            return (*this)[vertex1][vertex2] == 1;
+        [[nodiscard]] int find_independent() const override {
+            for (int row : header) {
+                bool minus_one_found = false;
+                int cell = 0;
+                while (cell < (*this)[index_of(row)].size()) {
+                    if ((*this)[index_of(row)][cell++] == -1) {
+                        minus_one_found = true;
+                        break;
+                    }
+                }
+                if (not minus_one_found)
+                    return row;
+            }
+            return -1;
         }
 
-        [[nodiscard]] std::vector<int> adjacent_nodes(int vertex) const override {
-            return {};
+        void remove_vertex(int vertex) override {
+            const size_t index = this->index_of(vertex);
+            this->erase_column(index);
+            this->erase_row(index);
+            header.erase(header.begin() + int(index));
         }
 
-        [[nodiscard]] std::vector<std::pair<int, int>> all_edges() const override {
-            return {};
+        [[nodiscard]] std::vector<int> successors(int vertex) const override {
+            std::vector<int> successors;
+            const auto& row = (*this)[index_of(vertex)];
+            for (int cell = 0; cell < row.size(); cell++) if (row[cell] == 1) successors.push_back(cell);
+            return successors;
+        }
+
+        [[nodiscard]] std::vector<int> all_vertices() const override {
+            return header;
         }
     };
 }
