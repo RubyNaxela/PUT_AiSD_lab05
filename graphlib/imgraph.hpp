@@ -60,34 +60,29 @@ namespace gr {
                         break;
                     }
                 }
-                if (not one_found) return row;
+                if (not one_found) return header[row];
             }
             return -1;
         }
 
         void remove_vertex(int vertex) override {
-            auto& row = (*this)[vertex];
+            const int index = this->index_of(vertex);
+            auto& row = (*this)[index];
             for (int i = 0; i < row.size(); i++) if (row[i] != 0) this->erase_column(i--);
-            const size_t index = this->index_of(vertex);
-            this->erase_row(index);
-            header.erase(header.begin() + int(index));
+            if (index < this->size_rows()) {
+                this->erase_row(index);
+                header.erase(header.begin() + int(index));
+            }
         }
 
         [[nodiscard]] std::vector<int> successors(int vertex) const override {
             std::vector<int> successors;
-
-            const auto& row = (*this)[vertex];
-            for (int i = 0; i < row.size(); i++) {
-                if (row[i] == -1) {
-                    for (int row_ind = 0; row_ind < this->size_rows(); row_ind++) {
-                        if ((*this)[row_ind][i] == 1) {
-                            successors.push_back(row_ind);
-                        }
-                    }
-                }
-            }
+            const auto& vertex_row = (*this)[vertex];
+            for (int col = 0; col < vertex_row.size(); col++)
+                if (vertex_row[col] == -1)
+                    for (int row = 0; row < this->size_rows(); row++)
+                        if ((*this)[row][col] == 1) successors.push_back(row);
             return successors;
-
         }
 
         [[nodiscard]] std::vector<int> all_vertices() const override {

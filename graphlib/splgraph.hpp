@@ -39,7 +39,10 @@ namespace gr {
 
         void remove_vertex(int vertex) override {
             for (auto row = this->begin(); row != this->end(); row++) {
-                if ((*row)[0] == vertex) this->erase_row(row--);
+                if ((*row)[0] == vertex) {
+                    this->erase_row(row--);
+                    continue;
+                }
                 std::erase_if(*row, [&](int x) { return x == vertex; });
             }
         }
@@ -83,7 +86,10 @@ namespace gr {
 
         void remove_vertex(int vertex) override {
             for (auto row = this->begin(); row != this->end(); row++) {
-                if ((*row)[0] == vertex) this->erase_row(row--);
+                if ((*row)[0] == vertex) {
+                    this->erase_row(row--);
+                    continue;
+                }
                 std::erase_if(*row, [&](int x) { return x == vertex; });
             }
         }
