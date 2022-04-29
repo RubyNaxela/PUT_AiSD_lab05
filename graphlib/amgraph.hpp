@@ -29,6 +29,10 @@ namespace gr {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
+        static adjacency_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
+            return matrix;
+        }
+
         ///
         /// \brief Creates a random adjacency matrix representation of a directed acyclic graph.
         /// \param vertices the number of vertices in the graph
