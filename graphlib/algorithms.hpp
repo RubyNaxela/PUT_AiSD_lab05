@@ -39,16 +39,16 @@ namespace gr {
         std::stack<int> path;
 
         auto white_successor = [&](int vertex) -> int {
-            for (int v: graph.successors(vertex)) if (states[v] == vertex_state::untouched) return v;
+            for (int v : graph.successors(vertex)) if (states[v] == vertex_state::untouched) return v;
             return -1;
         };
 
         auto any_white = [&]() -> bool {
-            for (int v: graph.all_vertices()) if (states[v] == vertex_state::untouched) return true;
+            for (int v : graph.all_vertices()) if (states[v] == vertex_state::untouched) return true;
             return false;
         };
 
-        for (int vertex: graph.all_vertices()) states[vertex] = vertex_state::untouched;
+        for (int vertex : graph.all_vertices()) states[vertex] = vertex_state::untouched;
         std::vector<int> vertices;
 
         step_4:
