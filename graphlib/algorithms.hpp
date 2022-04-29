@@ -14,7 +14,7 @@
 namespace gr {
 
     enum vertex_state {
-        untouched = *"untouched", touched = *"touched", sorted = *"sorted"
+        untouched, touched, sorted
     };
 
     template<typename Gr>
