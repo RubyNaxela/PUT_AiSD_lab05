@@ -2,11 +2,16 @@
 #define AISD_UTIL_HPP
 
 #include <chrono>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
 
 namespace gr {
+
+    void enable_bool_string() {
+        std::cout << std::boolalpha;
+    }
 
     template<typename Tp>
     std::string vec_str(const std::vector<Tp>& vec) {

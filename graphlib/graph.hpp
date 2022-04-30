@@ -4,7 +4,6 @@
 #include <initializer_list>
 #include <utility>
 #include <vector>
-#include <boolstr.hpp>
 #include <matrix.hpp>
 
 namespace gr {
