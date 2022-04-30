@@ -6,12 +6,17 @@
 
 #include <map>
 #include <stack>
+#include <stdexcept>
 #include <vector>
 #include <amgraph.hpp>
 #include <splgraph.hpp>
 #include <util.hpp>
 
 namespace gr {
+
+    struct graph_error : std::runtime_error {
+        explicit graph_error(const std::string& message) : runtime_error(message) {}
+    };
 
     template<typename Gr>
     requires std::is_base_of_v<graph, Gr>
@@ -20,6 +25,7 @@ namespace gr {
         std::vector<int> vertices;
         while (not graph.empty()) {
             const int independent = graph.find_independent();
+            if (independent == -1) throw graph_error("Graph is not acyclic");
             vertices.push_back(independent);
             graph.remove_vertex(independent);
         }
