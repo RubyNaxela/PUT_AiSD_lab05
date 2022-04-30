@@ -8,14 +8,15 @@
 
 namespace gr {
 
-    template<typename _Tp>
-    std::string vec_str(const std::vector<_Tp>& __vec) {
+    template<typename Tp>
+    std::string vec_str(const std::vector<Tp>& vec) {
         std::stringstream ss;
-        for (const auto& x : __vec) ss << x << " ";
+        for (const auto& x : vec) ss << x << " ";
         return ss.str();
     }
 
-    template<typename Dur, typename std::enable_if<std::chrono::__is_duration<Dur>::value>::type* = nullptr>
+    template<typename Dur>
+    requires std::chrono::__is_duration<Dur>::value
     class timer {
 
         std::chrono::time_point<std::chrono::high_resolution_clock, Dur> start_point, end_point;
@@ -67,7 +68,7 @@ namespace gr {
     typedef std::chrono::duration<double, std::milli> precision_ms;
     typedef std::chrono::duration<double, std::ratio<1, 1>> precision_s;
 
-#define scan(collection) (collection).begin(), (collection).end()
+#define whole(collection) (collection).begin(), (collection).end()
 }
 
 #endif //AISD_UTIL_HPP

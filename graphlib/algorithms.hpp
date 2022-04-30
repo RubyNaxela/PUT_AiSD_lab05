@@ -53,7 +53,7 @@ namespace gr {
         [[nodiscard]] int find_white() const {
             const int vertex = graph.find_independent();
             if (states.at(vertex) == vertex_state::untouched) return vertex;
-            return *std::find_if(scan(graph.all_vertices()),
+            return *std::find_if(whole(graph.all_vertices()),
                                  [&](int v) { return states.at(v) == vertex_state::untouched; });
         };
 
@@ -89,7 +89,7 @@ namespace gr {
 
         [[nodiscard]] bool any_white() const {
             const auto& vertices = graph.all_vertices();
-            return std::any_of(scan(vertices), [&](int v) { return states.at(v) == vertex_state::untouched; });
+            return std::any_of(whole(vertices), [&](int v) { return states.at(v) == vertex_state::untouched; });
         };
     };
 

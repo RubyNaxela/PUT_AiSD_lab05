@@ -11,11 +11,11 @@ namespace gr {
 
     struct graph : gr::matrix<int> {
 
-        graph(const std::initializer_list<std::vector<int>>& __init) : gr::matrix<int>(__init) {}
+        graph(const std::initializer_list<std::vector<int>>& init) : gr::matrix<int>(init) {}
 
-        explicit graph(const std::vector<std::vector<int>>& __init) : gr::matrix<int>(__init) {}
+        explicit graph(const std::vector<std::vector<int>>& vec) : gr::matrix<int>(vec) {}
 
-        explicit graph(const gr::matrix<int>& __init) : gr::matrix<int>(__init) {}
+        explicit graph(const gr::matrix<int>& matrix) : gr::matrix<int>(matrix) {}
 
         virtual ~graph() = default;
 

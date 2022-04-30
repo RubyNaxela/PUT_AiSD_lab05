@@ -13,7 +13,7 @@ namespace gr {
         std::vector<int> header;
 
         [[nodiscard]] int index_of(int vertex) const {
-            return int(std::find(scan(header), vertex) - header.begin());
+            return int(std::find(whole(header), vertex) - header.begin());
         }
 
         void add_edge(int from, int to) {

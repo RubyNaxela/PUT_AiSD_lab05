@@ -81,7 +81,7 @@ namespace gr {
         }
 
         [[nodiscard]] int find_independent() const override {
-            return (*std::find_if(scan(*this), [&](const auto& row) { return row.size() == 1; }))[0];
+            return (*std::find_if(whole(*this), [&](const auto& row) { return row.size() == 1; }))[0];
         }
 
         void remove_vertex(int vertex) override {
@@ -97,7 +97,7 @@ namespace gr {
         [[nodiscard]] std::vector<int> successors(int vertex) const override {
             std::vector<int> successors;
             for (const auto& row : *this)
-                if (row[0] != vertex and std::count(scan(row), vertex) > 0) successors.push_back(row[0]);
+                if (row[0] != vertex and std::count(whole(row), vertex) > 0) successors.push_back(row[0]);
             return successors;
         }
 

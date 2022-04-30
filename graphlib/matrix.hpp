@@ -21,16 +21,16 @@ namespace gr {
 
         matrix() = default;
 
-        matrix(const std::initializer_list<std::vector<Tp>>& __init) {
-            for (const auto& row : __init) matrix_vector.push_back(row);
+        matrix(const std::initializer_list<std::vector<Tp>>& init) {
+            for (const auto& row : init) matrix_vector.push_back(row);
         }
 
-        explicit matrix(const std::vector<std::vector<Tp>>& __init) {
-            matrix_vector = __init;
+        explicit matrix(const std::vector<std::vector<Tp>>& vector) {
+            matrix_vector = vector;
         }
 
-        matrix(const matrix<Tp>& __matrix) {
-            matrix_vector = __matrix.matrix_vector;
+        matrix(const matrix<Tp>& matrix) {
+            matrix_vector = matrix.matrix_vector;
         }
 
         matrix(int rows, int cols) {

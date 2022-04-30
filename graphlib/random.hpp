@@ -21,14 +21,14 @@ namespace gr {
 
     template<typename _Tp>
     requires std::is_integral_v<_Tp>
-    _Tp random(const _Tp __min, const _Tp __max) {
-        return std::uniform_int_distribution<_Tp>{__min, __max}(random::engine);
+    _Tp random(const _Tp min, const _Tp max) {
+        return std::uniform_int_distribution<_Tp>{min, max}(random::engine);
     }
 
     template<class _Tp>
     requires std::is_floating_point_v<_Tp>
-    _Tp random(const _Tp __min, const _Tp __max) {
-        return std::uniform_real_distribution<_Tp>{__min, __max}(random::engine);
+    _Tp random(const _Tp min, const _Tp max) {
+        return std::uniform_real_distribution<_Tp>{min, max}(random::engine);
     }
 
     template<typename _Tp>
