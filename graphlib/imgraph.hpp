@@ -65,6 +65,11 @@ namespace gr {
             return -1;
         }
 
+        [[nodiscard]] bool is_independent(int vertex) const override {
+            const auto& row = (*this)[index_of(vertex)];
+            return std::all_of(whole(row), [](int cell) { return cell != 1; });
+        }
+
         void remove_vertex(int vertex) override {
             const int index = this->index_of(vertex);
             auto& row = (*this)[index];

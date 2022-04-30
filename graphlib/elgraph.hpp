@@ -9,6 +9,18 @@ namespace gr {
 
         edges_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
+        [[nodiscard]] int find_independent() const override {
+            return -1;
+        }
+
+        [[nodiscard]] bool is_independent(int vertex) const override {
+            return true;
+        }
+
+        void remove_vertex(int vertex) override {
+
+        }
+
         [[nodiscard]] std::vector<int> successors(int vertex) const override {
             return {};
         }

@@ -37,6 +37,12 @@ namespace gr {
             return -1;
         }
 
+        [[nodiscard]] bool is_independent(int vertex) const override {
+            for (const auto& row : *this)
+                if (std::any_of(row.begin() + 1, row.end(), [=](int v) { return v == vertex; })) return false;
+            return true;
+        }
+
         void remove_vertex(int vertex) override {
             for (auto row = this->begin(); row != this->end(); row++) {
                 if ((*row)[0] == vertex) {
@@ -82,6 +88,10 @@ namespace gr {
 
         [[nodiscard]] int find_independent() const override {
             return (*std::find_if(whole(*this), [&](const auto& row) { return row.size() == 1; }))[0];
+        }
+
+        [[nodiscard]] bool is_independent(int vertex) const override {
+            return (*this)[vertex].size() == 1;
         }
 
         void remove_vertex(int vertex) override {

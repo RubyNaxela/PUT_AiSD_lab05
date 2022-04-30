@@ -50,6 +50,10 @@ namespace gr {
             return -1;
         }
 
+        [[nodiscard]] bool is_independent(int vertex) const override {
+            return true;
+        }
+
         void remove_vertex(int vertex) override {
 
         }

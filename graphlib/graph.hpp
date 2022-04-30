@@ -8,6 +8,11 @@
 
 namespace gr {
 
+    ///
+    /// \brief The base class for all graph representations. Requires that the number of rows
+    /// of the underlying matrix is equal to the number of vertices of the graph being represented.
+    /// The indices of these rows do not need to be identical to the indices of the graph vertices.
+    ///
     struct graph : gr::matrix<int> {
 
         graph(const std::initializer_list<std::vector<int>>& init) : gr::matrix<int>(init) {}
@@ -29,6 +34,11 @@ namespace gr {
         /// \return the first independent vertex of this graph
         ///
         [[nodiscard]] virtual int find_independent() const = 0;
+
+        ///
+        /// \return whether the specified vertex has no predecessors
+        ///
+        [[nodiscard]] virtual bool is_independent(int) const = 0;
 
         ///
         /// \brief Removes the specified vertex from this graph.
