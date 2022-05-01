@@ -7,17 +7,18 @@
 #include <stdexcept>
 #include <vector>
 
+template<typename Tp>
+std::ostream& operator<<(std::ostream& out, const std::vector<Tp>& vec) {
+    std::stringstream ss = std::stringstream{} << "[";
+    for (const auto& x : vec) ss << x << ", ";
+    const std::string& vec_str = ss.str();
+    return out << vec_str.substr(0, vec_str.size() - 2) << "]";
+}
+
 namespace gr {
 
     void enable_bool_string() {
         std::cout << std::boolalpha;
-    }
-
-    template<typename Tp>
-    std::string vec_str(const std::vector<Tp>& vec) {
-        std::stringstream ss;
-        for (const auto& x : vec) ss << x << " ";
-        return ss.str();
     }
 
     template<typename Dur>
