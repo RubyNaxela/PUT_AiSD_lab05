@@ -2,6 +2,7 @@
 #define AISD_ELGRAPH_HPP
 
 #include <graph.hpp>
+#include <util.hpp>
 
 namespace gr {
 
@@ -10,7 +11,7 @@ namespace gr {
         edges_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
         [[nodiscard]] int find_independent() const override {
-            return -1;
+            return not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {

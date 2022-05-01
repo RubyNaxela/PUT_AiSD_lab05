@@ -3,6 +3,7 @@
 
 #include <graph.hpp>
 #include <splgraph.hpp>
+#include <util.hpp>
 
 namespace gr {
 
@@ -62,7 +63,7 @@ namespace gr {
                 }
                 if (not one_found) return header[row];
             }
-            return -1;
+            return not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {

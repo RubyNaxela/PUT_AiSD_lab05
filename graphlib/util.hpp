@@ -74,6 +74,9 @@ namespace gr {
     typedef std::chrono::duration<double, std::ratio<1, 1>> precision_s;
 
 #define whole(collection) (collection).begin(), (collection).end()
+#define not_found (-1)
+#define is_found != (-1)
+#define is_not_found == (-1)
 }
 
 #endif //AISD_UTIL_HPP

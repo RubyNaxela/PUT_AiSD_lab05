@@ -24,7 +24,7 @@ namespace gr {
         std::vector<int> vertices;
         while (not graph.empty()) {
             const int independent = graph.find_independent();
-            if (independent == -1) throw graph_error("Graph is not acyclic");
+            if (independent is_not_found) throw graph_error("Graph is not acyclic");
             vertices.push_back(independent);
             graph.remove_vertex(independent);
         }
@@ -69,11 +69,11 @@ namespace gr {
 
         [[nodiscard]] int white_successor() const {
             for (int v : graph.successors(current_vertex())) if (states.at(v) == vertex_state::untouched) return v;
-            return -1;
+            return not_found;
         };
 
         [[nodiscard]] bool can_advance() const {
-            return white_successor() != -1;
+            return white_successor() is_found;
         }
 
         void mark_sorted() {

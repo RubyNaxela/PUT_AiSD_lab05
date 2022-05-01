@@ -78,7 +78,7 @@ namespace gr {
                 if (not minus_one_found)
                     return row;
             }
-            return -1;
+            return not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {

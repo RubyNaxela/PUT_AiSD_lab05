@@ -2,6 +2,7 @@
 #define AISD_GMGRAPH_HPP
 
 #include <graph.hpp>
+#include <util.hpp>
 
 namespace gr {
 
@@ -47,7 +48,7 @@ namespace gr {
         }
 
         [[nodiscard]] int find_independent() const override {
-            return -1;
+            return not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {

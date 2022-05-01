@@ -34,7 +34,7 @@ namespace gr {
             std::set<int> successors;
             for (const auto& row : *this) for (int i = 1; i < row.size(); i++) successors.insert(row[i]);
             for (int vertex : this->all_vertices()) if (not successors.contains(vertex)) return vertex;
-            return -1;
+            return not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {
@@ -87,7 +87,8 @@ namespace gr {
         }
 
         [[nodiscard]] int find_independent() const override {
-            return (*std::find_if(whole(*this), [&](const auto& row) { return row.size() == 1; }))[0];
+            const auto row = std::find_if(whole(*this), [&](const auto& r) { return r.size() == 1; });
+            return row != this->end() ? (*row)[0] : not_found;
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {
