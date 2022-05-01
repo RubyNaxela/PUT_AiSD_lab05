@@ -1,6 +1,5 @@
 #ifndef AISD_ALGORITHMS_HPP
 #define AISD_ALGORITHMS_HPP
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "UnusedParameter"
 
@@ -53,8 +52,10 @@ namespace gr {
         [[nodiscard]] int find_white() const {
             const int vertex = graph.find_independent();
             if (states.at(vertex) == vertex_state::untouched) return vertex;
-            return *std::find_if(whole(graph.all_vertices()),
-                                 [&](int v) { return states.at(v) == vertex_state::untouched; });
+            const auto all_vertices = graph.all_vertices();
+            return *std::find_if(whole(all_vertices), [&](int v) {
+                return graph.is_independent(v) and states.at(v) == vertex_state::untouched;
+            });
         };
 
         void visit(int vertex) {
