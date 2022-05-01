@@ -63,11 +63,14 @@ namespace gr {
         }
 
         [[nodiscard]] int current_vertex() const {
-            return path.top();
+            return not path.empty() ? path.top() : not_found;
         }
 
         [[nodiscard]] int white_successor() const {
-            for (int v : graph.successors(current_vertex())) if (states.at(v) == vertex_state::untouched) return v;
+            for (int v : graph.successors(current_vertex())) {
+                if (states.at(v) == vertex_state::untouched) return v;
+                else if (states.at(v) == vertex_state::touched) throw graph_error("Graph is not acyclic");
+            }
             return not_found;
         };
 
