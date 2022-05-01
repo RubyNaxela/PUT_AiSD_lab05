@@ -6,7 +6,8 @@
 #include <elgraph.hpp>
 #include <gmgraph.hpp>
 #include <imgraph.hpp>
-#include <splgraph.hpp>
+#include <plgraph.hpp>
+#include <slgraph.hpp>
 #include <util.hpp>
 
 #endif //AISD_AMGRAPH

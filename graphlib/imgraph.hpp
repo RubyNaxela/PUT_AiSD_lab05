@@ -2,7 +2,8 @@
 #define AISD_IMGRAPH_HPP
 
 #include <graph.hpp>
-#include <splgraph.hpp>
+#include <amgraph.hpp>
+#include <slgraph.hpp>
 #include <util.hpp>
 
 namespace gr {

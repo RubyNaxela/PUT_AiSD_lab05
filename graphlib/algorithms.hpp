@@ -7,8 +7,7 @@
 #include <stack>
 #include <stdexcept>
 #include <vector>
-#include <amgraph.hpp>
-#include <splgraph.hpp>
+#include <graph.hpp>
 #include <util.hpp>
 
 namespace gr {
