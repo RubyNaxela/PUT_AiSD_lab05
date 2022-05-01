@@ -49,8 +49,6 @@ namespace gr {
         }
 
         [[nodiscard]] int find_white() const {
-            const int vertex = graph.find_independent();
-            if (states.at(vertex) == vertex_state::untouched) return vertex;
             const auto all_vertices = graph.all_vertices();
             return *std::find_if(whole(all_vertices), [&](int v) {
                 return graph.is_independent(v) and states.at(v) == vertex_state::untouched;
