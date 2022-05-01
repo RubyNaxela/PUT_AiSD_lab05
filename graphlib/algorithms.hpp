@@ -33,7 +33,7 @@ namespace gr {
 
     template<typename Gr>
     requires std::is_base_of_v<graph, Gr>
-    class dfs_wrapper {
+    class dfs_traversor {
 
         enum vertex_state {
             untouched, touched, sorted
@@ -45,7 +45,7 @@ namespace gr {
 
     public:
 
-        explicit dfs_wrapper(const Gr& source) : graph(source) {
+        explicit dfs_traversor(const Gr& source) : graph(source) {
             for (int vertex : graph.all_vertices()) states[vertex] = vertex_state::untouched;
         }
 
@@ -97,7 +97,7 @@ namespace gr {
     template<typename Gr>
     requires std::is_base_of_v<graph, Gr>
     std::vector<int> sort_dfs(const Gr& graph) {
-        dfs_wrapper<Gr> dfs_graph(graph);
+        dfs_traversor<Gr> dfs_graph(graph);
         std::vector<int> vertices;
         do {
             dfs_graph.visit(dfs_graph.find_white());
