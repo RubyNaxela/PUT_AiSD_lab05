@@ -43,12 +43,11 @@ namespace gr {
             std::vector<std::vector<int>> vec(vertices);
             for (int i = 0; i < vertices; ++i) {
                 for (int j = i; j < vertices; ++j) {
-                    if (i == j) {
-                        vec[i].push_back(0);
-                    } else if (j > i) {
-                        int r = gr::random_bool(fill);
-                        vec[i].push_back(r);
-                        vec[j].push_back(r == 1 ? -1 : 0);
+                    if (i == j) vec[i].push_back(0);
+                    else if (j > i) {
+                        int random_0_or_1 = gr::random_bool(fill);
+                        vec[i].push_back(random_0_or_1);
+                        vec[j].push_back(random_0_or_1 == 1 ? -1 : 0);
                     }
                 }
             }
@@ -75,8 +74,7 @@ namespace gr {
                         break;
                     }
                 }
-                if (not minus_one_found)
-                    return row;
+                if (not minus_one_found) return row;
             }
             return not_found;
         }

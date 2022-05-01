@@ -39,14 +39,10 @@ namespace gr {
         static incidence_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
             auto slist = gr::successors_list_dir_graph::from_adjacency_matrix(matrix);
             incidence_matrix_dir_graph imdg(std::vector<std::vector<int>>(slist.size_rows()));
-
             for (const auto& row : slist) {
                 int origin = row[0];
-                for (int i = 1; i < row.size(); i++) {
-                    imdg.add_edge(origin, row[i]);
-                }
+                for (int i = 1; i < row.size(); i++) imdg.add_edge(origin, row[i]);
             }
-
             return imdg;
         }
 

@@ -21,11 +21,7 @@ namespace gr {
             std::vector<std::vector<int>> list_vec(matrix.size_rows());
             for (int i = 0; i < matrix.size_rows(); i++) {
                 list_vec[i].push_back(i);
-                for (int j = 0; j < matrix.size_cols(); j++) {
-                    if (matrix[i][j] == 1) {
-                        list_vec[i].push_back(j);
-                    }
-                }
+                for (int j = 0; j < matrix.size_cols(); j++) if (matrix[i][j] == 1) list_vec[i].push_back(j);
             }
             return successors_list_dir_graph(list_vec);
         }
@@ -38,9 +34,8 @@ namespace gr {
         }
 
         [[nodiscard]] bool is_independent(int vertex) const override {
-            for (const auto& row : *this)
-                if (std::any_of(row.begin() + 1, row.end(), [=](int v) { return v == vertex; })) return false;
-            return true;
+            return std::none_of(whole(*this),
+                                [=](const auto& row) { return std::count(row.begin() + 1, row.end(), vertex); });
         }
 
         void remove_vertex(int vertex) override {
@@ -49,7 +44,7 @@ namespace gr {
                     this->erase_row(row--);
                     continue;
                 }
-                std::erase_if(*row, [&](int x) { return x == vertex; });
+                std::erase(*row, vertex);
             }
         }
 
@@ -77,11 +72,7 @@ namespace gr {
             std::vector<std::vector<int>> list_vec(matrix.size_rows());
             for (int i = 0; i < matrix.size_rows(); i++) {
                 list_vec[i].push_back(i);
-                for (int j = 0; j < matrix.size_cols(); j++) {
-                    if (matrix[i][j] == -1) {
-                        list_vec[i].push_back(j);
-                    }
-                }
+                for (int j = 0; j < matrix.size_cols(); j++) if (matrix[i][j] == -1) list_vec[i].push_back(j);
             }
             return predecessors_list_dir_graph(list_vec);
         }
@@ -101,7 +92,7 @@ namespace gr {
                     this->erase_row(row--);
                     continue;
                 }
-                std::erase_if(*row, [&](int x) { return x == vertex; });
+                std::erase(*row, vertex);
             }
         }
 
