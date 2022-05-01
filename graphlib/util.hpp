@@ -1,5 +1,5 @@
-#ifndef AISD_UTIL_HPP
-#define AISD_UTIL_HPP
+#ifndef GRAPHLIB_UTIL_HPP
+#define GRAPHLIB_UTIL_HPP
 
 #include <chrono>
 #include <iostream>
@@ -79,4 +79,4 @@ namespace gr {
 #define is_not_found == (-1)
 }
 
-#endif //AISD_UTIL_HPP
+#endif //GRAPHLIB_UTIL_HPP

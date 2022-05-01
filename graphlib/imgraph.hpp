@@ -1,5 +1,5 @@
-#ifndef AISD_IMGRAPH_HPP
-#define AISD_IMGRAPH_HPP
+#ifndef GRAPHLIB_IMGRAPH_HPP
+#define GRAPHLIB_IMGRAPH_HPP
 
 #include <graph.hpp>
 #include <amgraph.hpp>
@@ -94,4 +94,4 @@ namespace gr {
     };
 }
 
-#endif //AISD_IMGRAPH_HPP
+#endif //GRAPHLIB_IMGRAPH_HPP

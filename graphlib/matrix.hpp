@@ -1,5 +1,5 @@
-#ifndef AISD_MATRIX_HPP
-#define AISD_MATRIX_HPP
+#ifndef GRAPHLIB_MATRIX_HPP
+#define GRAPHLIB_MATRIX_HPP
 
 #pragma ide diagnostic ignored "OCDFAInspection"
 
@@ -103,4 +103,4 @@ namespace gr {
 
 }
 
-#endif //AISD_MATRIX_HPP
+#endif //GRAPHLIB_MATRIX_HPP

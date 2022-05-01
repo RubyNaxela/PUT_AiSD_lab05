@@ -1,5 +1,5 @@
-#ifndef AISD_ELGRAPH_HPP
-#define AISD_ELGRAPH_HPP
+#ifndef GRAPHLIB_ELGRAPH_HPP
+#define GRAPHLIB_ELGRAPH_HPP
 
 #include <graph.hpp>
 #include <util.hpp>
@@ -32,4 +32,4 @@ namespace gr {
     };
 }
 
-#endif //AISD_ELGRAPH_HPP
+#endif //GRAPHLIB_ELGRAPH_HPP

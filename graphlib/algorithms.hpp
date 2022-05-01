@@ -1,5 +1,5 @@
-#ifndef AISD_ALGORITHMS_HPP
-#define AISD_ALGORITHMS_HPP
+#ifndef GRAPHLIB_ALGORITHMS_HPP
+#define GRAPHLIB_ALGORITHMS_HPP
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "UnusedParameter"
 
@@ -117,4 +117,4 @@ namespace gr {
     }
 }
 
-#endif //AISD_ALGORITHMS_HPP
+#endif //GRAPHLIB_ALGORITHMS_HPP

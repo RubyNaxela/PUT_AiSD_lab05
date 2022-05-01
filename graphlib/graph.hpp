@@ -1,5 +1,5 @@
-#ifndef AISD_GRAPH_HPP
-#define AISD_GRAPH_HPP
+#ifndef GRAPHLIB_GRAPH_HPP
+#define GRAPHLIB_GRAPH_HPP
 
 #include <initializer_list>
 #include <utility>
@@ -57,4 +57,4 @@ namespace gr {
     };
 }
 
-#endif //AISD_GRAPH_HPP
+#endif //GRAPHLIB_GRAPH_HPP

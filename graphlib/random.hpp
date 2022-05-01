@@ -1,5 +1,5 @@
-#ifndef AISD_RANDOM_HPP
-#define AISD_RANDOM_HPP
+#ifndef GRAPHLIB_RANDOM_HPP
+#define GRAPHLIB_RANDOM_HPP
 #pragma ide diagnostic ignored "cert-err58-cpp"
 #pragma ide diagnostic ignored "cert-msc51-cpp"
 #pragma ide diagnostic ignored "cert-msc32-c"
@@ -49,4 +49,4 @@ namespace gr {
 
 }
 
-#endif //AISD_RANDOM_HPP
+#endif //GRAPHLIB_RANDOM_HPP

@@ -1,5 +1,5 @@
-#ifndef AISD_SLGRAPH_HPP
-#define AISD_SLGRAPH_HPP
+#ifndef GRAPHLIB_SLGRAPH_HPP
+#define GRAPHLIB_SLGRAPH_HPP
 
 #include <set>
 #include <amgraph.hpp>
@@ -60,4 +60,4 @@ namespace gr {
     };
 }
 
-#endif //AISD_SLGRAPH_HPP
+#endif //GRAPHLIB_SLGRAPH_HPP

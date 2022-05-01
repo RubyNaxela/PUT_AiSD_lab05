@@ -1,5 +1,5 @@
-#ifndef AISD_AMGRAPH
-#define AISD_AMGRAPH
+#ifndef GRAPHLIB_AMGRAPH
+#define GRAPHLIB_AMGRAPH
 
 #include <algorithms.hpp>
 #include <amgraph.hpp>
@@ -10,4 +10,4 @@
 #include <slgraph.hpp>
 #include <util.hpp>
 
-#endif //AISD_AMGRAPH
+#endif //GRAPHLIB_AMGRAPH
