@@ -18,15 +18,6 @@ namespace gr {
             return int(std::find(whole(header), vertex) - header.begin());
         }
 
-        void add_edge(int from, int to) {
-            for (int i = 0; i < this->size_rows(); i++) {
-                auto& row = (*this)[i];
-                if (i == from) row.push_back(-1);
-                else if (i == to) row.push_back(1);
-                else row.push_back(0);
-            }
-        }
-
     public:
 
         incidence_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
@@ -35,16 +26,6 @@ namespace gr {
 
         explicit incidence_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
-        }
-
-        static incidence_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
-            auto slist = gr::successors_list_dir_graph::from_adjacency_matrix(matrix);
-            incidence_matrix_dir_graph imdg(std::vector<std::vector<int>>(slist.size_rows()));
-            for (const auto& row : slist) {
-                int origin = row[0];
-                for (int i = 1; i < row.size(); i++) imdg.add_edge(origin, row[i]);
-            }
-            return imdg;
         }
 
         [[nodiscard]] int find_independent() const override {

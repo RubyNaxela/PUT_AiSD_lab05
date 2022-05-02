@@ -13,15 +13,6 @@ namespace gr {
 
         explicit predecessors_list_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
 
-        static predecessors_list_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
-            std::vector<std::vector<int>> list_vec(matrix.size_rows());
-            for (int i = 0; i < matrix.size_rows(); i++) {
-                list_vec[i].push_back(i);
-                for (int j = 0; j < matrix.size_cols(); j++) if (matrix[i][j] == -1) list_vec[i].push_back(j);
-            }
-            return predecessors_list_dir_graph(list_vec);
-        }
-
         [[nodiscard]] int find_independent() const override {
             const auto row = std::find_if(whole(*this), [&](const auto& r) { return r.size() == 1; });
             return row != this->end() ? (*row)[0] : not_found;

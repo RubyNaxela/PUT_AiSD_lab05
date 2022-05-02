@@ -25,12 +25,12 @@ namespace gr {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
+        explicit adjacency_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        static adjacency_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
-            return matrix;
+        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
+            for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
         ///

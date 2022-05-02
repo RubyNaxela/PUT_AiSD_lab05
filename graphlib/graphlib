@@ -4,6 +4,7 @@
 #include <algorithms.hpp>
 #include <amgraph.hpp>
 #include <elgraph.hpp>
+#include <conversion.hpp>
 #include <gmgraph.hpp>
 #include <imgraph.hpp>
 #include <plgraph.hpp>
