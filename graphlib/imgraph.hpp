@@ -8,7 +8,7 @@
 
 namespace gr {
 
-    struct incidence_matrix_dir_graph : graph {
+    struct imatrix_dir_graph : graph {
 
     private:
 
@@ -20,11 +20,11 @@ namespace gr {
 
     public:
 
-        incidence_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
+        imatrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit incidence_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
+        explicit imatrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 

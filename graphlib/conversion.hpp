@@ -11,44 +11,44 @@ namespace gr {
     class intercom {
 
         template<typename Origin>
-        requires std::is_base_of_v<adjacency_matrix_dir_graph, Origin>
-        static adjacency_matrix_dir_graph from_origin_to_adj_matrix(const Origin& graph) {
+        requires std::is_base_of_v<amatrix_dir_graph, Origin>
+        static amatrix_dir_graph from_origin_to_adj_matrix(const Origin& graph) {
             return graph;
         }
 
         template<typename Target>
-        requires std::is_base_of_v<adjacency_matrix_dir_graph, Target>
-        static Target from_adj_matrix_to_target(const adjacency_matrix_dir_graph& graph) {
+        requires std::is_base_of_v<amatrix_dir_graph, Target>
+        static Target from_adj_matrix_to_target(const amatrix_dir_graph& graph) {
             return graph;
         }
 
         template<typename Target>
-        requires std::is_base_of_v<predecessors_list_dir_graph, Target>
-        static Target from_adj_matrix_to_target(const adjacency_matrix_dir_graph& graph) {
+        requires std::is_base_of_v<plist_dir_graph, Target>
+        static Target from_adj_matrix_to_target(const amatrix_dir_graph& graph) {
             std::vector<std::vector<int>> list_vec(graph.size_rows());
             for (int i = 0; i < graph.size_rows(); i++) {
                 list_vec[i].push_back(i);
                 for (int j = 0; j < graph.size_cols(); j++) if (graph[i][j] == -1) list_vec[i].push_back(j);
             }
-            return predecessors_list_dir_graph(list_vec);
+            return plist_dir_graph(list_vec);
         }
 
         template<typename Target>
-        requires std::is_base_of_v<successors_list_dir_graph, Target>
-        static Target from_adj_matrix_to_target(const adjacency_matrix_dir_graph& graph) {
+        requires std::is_base_of_v<slist_dir_graph, Target>
+        static Target from_adj_matrix_to_target(const amatrix_dir_graph& graph) {
             std::vector<std::vector<int>> list_vec(graph.size_rows());
             for (int i = 0; i < graph.size_rows(); i++) {
                 list_vec[i].push_back(i);
                 for (int j = 0; j < graph.size_cols(); j++) if (graph[i][j] == 1) list_vec[i].push_back(j);
             }
-            return successors_list_dir_graph(list_vec);
+            return slist_dir_graph(list_vec);
         }
 
         template<typename Target>
-        requires std::is_base_of_v<incidence_matrix_dir_graph, Target>
-        static Target from_adj_matrix_to_target(const adjacency_matrix_dir_graph& graph) {
-            auto slist = from_adj_matrix_to_target<successors_list_dir_graph>(graph);
-            incidence_matrix_dir_graph imdg(std::vector<std::vector<int>>(slist.size_rows()));
+        requires std::is_base_of_v<imatrix_dir_graph, Target>
+        static Target from_adj_matrix_to_target(const amatrix_dir_graph& graph) {
+            auto slist = from_adj_matrix_to_target<slist_dir_graph>(graph);
+            imatrix_dir_graph imdg(std::vector<std::vector<int>>(slist.size_rows()));
             auto add_edge = [&](int from, int to) {
                 for (int i = 0; i < imdg.size_rows(); i++) {
                     auto& row = imdg[i];

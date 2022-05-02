@@ -8,11 +8,11 @@
 
 namespace gr {
 
-    struct successors_list_dir_graph : graph {
+    struct slist_dir_graph : graph {
 
-        successors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        slist_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
-        explicit successors_list_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+        explicit slist_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
 
         [[nodiscard]] int find_independent() const override {
             std::set<int> successors;

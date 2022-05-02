@@ -7,11 +7,11 @@
 
 namespace gr {
 
-    struct predecessors_list_dir_graph : graph {
+    struct plist_dir_graph : graph {
 
-        predecessors_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        plist_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
-        explicit predecessors_list_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+        explicit plist_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
 
         [[nodiscard]] int find_independent() const override {
             const auto row = std::find_if(whole(*this), [&](const auto& r) { return r.size() == 1; });

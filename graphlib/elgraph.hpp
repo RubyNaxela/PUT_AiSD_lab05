@@ -6,9 +6,9 @@
 
 namespace gr {
 
-    struct edges_list_dir_graph : graph {
+    struct elist_dir_graph : graph {
 
-        edges_list_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        elist_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
         [[nodiscard]] int find_independent() const override {
             return not_found;

@@ -9,7 +9,7 @@
 
 namespace gr {
 
-    struct adjacency_matrix_dir_graph : graph {
+    struct amatrix_dir_graph : graph {
 
     private:
 
@@ -21,15 +21,15 @@ namespace gr {
 
     public:
 
-        adjacency_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
+        amatrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit adjacency_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
+        explicit amatrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit adjacency_matrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
+        explicit amatrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
@@ -39,7 +39,7 @@ namespace gr {
         /// \param fill the degree of fill
         /// \return a random DAG adjacency matrix
         ///
-        static adjacency_matrix_dir_graph random(int vertices, float fill) {
+        static amatrix_dir_graph random(int vertices, float fill) {
             std::vector<std::vector<int>> vec(vertices);
             for (int i = 0; i < vertices; ++i) {
                 for (int j = i; j < vertices; ++j) {
@@ -61,7 +61,7 @@ namespace gr {
                 for (int col_index : shuffled_indices) matrix[r][c++] = vec[row_index][col_index];
                 r++;
             }
-            return adjacency_matrix_dir_graph(matrix);
+            return amatrix_dir_graph(matrix);
         }
 
         [[nodiscard]] int find_independent() const override {

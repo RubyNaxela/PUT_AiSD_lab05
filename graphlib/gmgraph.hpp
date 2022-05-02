@@ -6,13 +6,13 @@
 
 namespace gr {
 
-    struct graph_matrix_dir_graph : graph {
+    struct gmatrix_dir_graph : graph {
 
-        graph_matrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
+        gmatrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {}
 
-        explicit graph_matrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
+        explicit gmatrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {}
 
-        static graph_matrix_dir_graph from_adjacency_matrix(const adjacency_matrix_dir_graph& matrix) {
+        static gmatrix_dir_graph from_adjacency_matrix(const amatrix_dir_graph& matrix) {
             std::vector<std::vector<int>> successors_list(matrix.size_rows());
             std::vector<std::vector<int>> predecessors_list(matrix.size_rows());
             std::vector<std::vector<int>> no_incidence_list(matrix.size_rows());
@@ -44,7 +44,7 @@ namespace gr {
 
 
 
-            return graph_matrix_dir_graph(graph_matrix);
+            return gmatrix_dir_graph(graph_matrix);
         }
 
         [[nodiscard]] int find_independent() const override {
