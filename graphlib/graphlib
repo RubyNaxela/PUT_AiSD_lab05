@@ -8,6 +8,7 @@
 #include <gmgraph.hpp>
 #include <imgraph.hpp>
 #include <plgraph.hpp>
+#include <random.hpp>
 #include <slgraph.hpp>
 #include <util.hpp>
 

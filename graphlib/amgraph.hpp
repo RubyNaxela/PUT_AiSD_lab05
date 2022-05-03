@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <numeric>
 #include <graph.hpp>
-#include <random.hpp>
 #include <util.hpp>
 
 namespace gr {
@@ -31,37 +30,6 @@ namespace gr {
 
         explicit amatrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
-        }
-
-        ///
-        /// \brief Creates a random adjacency matrix representation of a directed acyclic graph.
-        /// \param vertices the number of vertices in the graph
-        /// \param fill the degree of fill
-        /// \return a random DAG adjacency matrix
-        ///
-        static amatrix_dir_graph random(int vertices, float fill) {
-            std::vector<std::vector<int>> vec(vertices);
-            for (int i = 0; i < vertices; ++i) {
-                for (int j = i; j < vertices; ++j) {
-                    if (i == j) vec[i].push_back(0);
-                    else if (j > i) {
-                        int random_0_or_1 = gr::random_bool(fill);
-                        vec[i].push_back(random_0_or_1);
-                        vec[j].push_back(random_0_or_1 == 1 ? -1 : 0);
-                    }
-                }
-            }
-            std::vector<int> shuffled_indices(vertices);
-            std::iota(shuffled_indices.begin(), shuffled_indices.end(), 0);
-            std::shuffle(shuffled_indices.begin(), shuffled_indices.end(), gr::random::engine);
-            gr::matrix<int> matrix(vertices, vertices);
-            int r = 0;
-            for (int row_index : shuffled_indices) {
-                int c = 0;
-                for (int col_index : shuffled_indices) matrix[r][c++] = vec[row_index][col_index];
-                r++;
-            }
-            return amatrix_dir_graph(matrix);
         }
 
         [[nodiscard]] int find_independent() const override {
