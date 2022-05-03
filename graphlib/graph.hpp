@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 #include <matrix.hpp>
+#include <util.hpp>
 
 namespace gr {
 
@@ -54,6 +55,33 @@ namespace gr {
         /// \return all vertices of this graph
         ///
         [[nodiscard]] virtual std::vector<int> all_vertices() const = 0;
+
+        ///
+        /// \brief Transfers the header from the specified graph to this graph.
+        /// \param graph the graph to transfer the header from
+        ///
+        template<typename Gr>
+        requires std::is_base_of_v<graph, Gr>
+        void set_header_from(const Gr& graph) {
+            this->header = graph.header;
+        }
+
+    protected:
+
+        ///
+        /// \brief Used by matrix representations as a list of graph vertex indices, since those
+        /// (unlike list representations) do not themselves contain information about the indices.
+        ///
+        std::vector<int> header;
+
+        ///
+        /// \brief Returns which row of the matrix representation contains data for
+        /// the vertex with the specified index. Used only by matrix representations.
+        /// \return position of the specified vertex in the header
+        ///
+        [[nodiscard]] int index_of(int vertex) const {
+            return int(std::find(whole(header), vertex) - header.begin());
+        }
     };
 }
 

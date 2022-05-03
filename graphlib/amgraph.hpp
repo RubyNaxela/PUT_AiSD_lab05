@@ -10,39 +10,29 @@ namespace gr {
 
     struct amatrix_dir_graph : graph {
 
-    private:
-
-        std::vector<int> header;
-
-        [[nodiscard]] int index_of(int vertex) const {
-            return int(std::find(whole(header), vertex) - header.begin());
-        }
-
-    public:
-
-        amatrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
+        amatrix_dir_graph(const std::initializer_list<std::vector<int>>& init) : graph(init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit amatrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
+        explicit amatrix_dir_graph(const std::vector<std::vector<int>>& vector) : graph(vector) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit amatrix_dir_graph(const gr::matrix<int>& __init) : graph(__init) {
+        explicit amatrix_dir_graph(const gr::matrix<int>& matrix) : graph(matrix) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
         [[nodiscard]] int find_independent() const override {
-            for (int row : header) {
+            for (int vertex : header) {
                 bool minus_one_found = false;
                 int cell = 0;
-                while (cell < (*this)[index_of(row)].size()) {
-                    if ((*this)[index_of(row)][cell++] == -1) {
+                while (cell < (*this)[index_of(vertex)].size()) {
+                    if ((*this)[index_of(vertex)][cell++] == -1) {
                         minus_one_found = true;
                         break;
                     }
                 }
-                if (not minus_one_found) return row;
+                if (not minus_one_found) return vertex;
             }
             return not_found;
         }

@@ -10,21 +10,11 @@ namespace gr {
 
     struct imatrix_dir_graph : graph {
 
-    private:
-
-        std::vector<int> header;
-
-        [[nodiscard]] int index_of(int vertex) const {
-            return int(std::find(whole(header), vertex) - header.begin());
-        }
-
-    public:
-
-        imatrix_dir_graph(const std::initializer_list<std::vector<int>>& __init) : graph(__init) {
+        imatrix_dir_graph(const std::initializer_list<std::vector<int>>& init) : graph(init) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 
-        explicit imatrix_dir_graph(const std::vector<std::vector<int>>& __init) : graph(__init) {
+        explicit imatrix_dir_graph(const std::vector<std::vector<int>>& vec) : graph(vec) {
             for (int i = 0; i < this->size_rows(); i++) header.push_back(i);
         }
 

@@ -2,6 +2,7 @@
 #define GRAPHLIB_CONVERSION_HPP
 
 #include <amgraph.hpp>
+#include <gmgraph.hpp>
 #include <imgraph.hpp>
 #include <plgraph.hpp>
 #include <slgraph.hpp>
@@ -14,6 +15,12 @@ namespace gr {
         requires std::is_base_of_v<amatrix_dir_graph, Origin>
         static amatrix_dir_graph from_origin_to_adj_matrix(const Origin& graph) {
             return graph;
+        }
+
+        template<typename Origin>
+        requires std::is_base_of_v<gmatrix_dir_graph, Origin>
+        static amatrix_dir_graph from_origin_to_adj_matrix(const Origin& graph) {
+            return graph.to_amatrix();
         }
 
         template<typename Target>
@@ -61,7 +68,14 @@ namespace gr {
                 int origin = row[0];
                 for (int i = 1; i < row.size(); i++) add_edge(origin, row[i]);
             }
+            imdg.set_header_from(graph);
             return imdg;
+        }
+
+        template<typename Target>
+        requires std::is_base_of_v<gmatrix_dir_graph, Target>
+        static Target from_adj_matrix_to_target(const amatrix_dir_graph& graph) {
+            return gmatrix_dir_graph::from_amatrix(graph);
         }
 
     public:

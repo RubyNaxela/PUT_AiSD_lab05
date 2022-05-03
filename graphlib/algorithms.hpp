@@ -18,8 +18,7 @@ namespace gr {
 
     template<typename Gr>
     requires std::is_base_of_v<graph, Gr>
-    std::vector<int> sort_bfs(const Gr& __graph) {
-        Gr graph = __graph;
+    std::vector<int> sort_bfs(Gr graph) {
         std::vector<int> vertices;
         while (not graph.empty()) {
             const int independent = graph.find_independent();
