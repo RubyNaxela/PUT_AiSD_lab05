@@ -65,7 +65,7 @@ namespace gr {
             return matrix_vector[0].size();
         }
 
-        const_iterator begin() const {
+        [[nodiscard]] const_iterator begin() const {
             return matrix_vector.begin();
         }
 
@@ -73,7 +73,7 @@ namespace gr {
             return matrix_vector.begin();
         }
 
-        const_iterator end() const {
+        [[nodiscard]] const_iterator end() const {
             return matrix_vector.end();
         }
 
@@ -81,13 +81,43 @@ namespace gr {
             return matrix_vector.end();
         }
 
-        [[nodiscard]] std::string str() const {
-            std::stringstream ss;
+        template<typename Target, typename Map>
+        [[nodiscard]] matrix<Target> map(const Map& mapper) const {
+            matrix<Target> matrix(size_rows(), size_cols());
+            auto matrix_row = matrix.begin();
             for (const auto& row : *this) {
+                auto matrix_row_cell = matrix_row++->begin();
+                for (const auto& cell : row) *matrix_row_cell++ = mapper(cell);
+            }
+            return matrix;
+        }
+
+        template<typename Acc>
+        [[nodiscard]] std::vector<Tp> reduce_cols(const Acc& accumulator) const {
+            std::vector<Tp> vector(size_cols());
+            for (const auto& row : *this) {
+                auto vector_cell = vector.begin();
                 for (const auto& cell : row) {
-                    std::stringstream cellss;
-                    cellss << cell;
-                    if (cellss.str().length() == 1) ss << ' ';
+                    *vector_cell = accumulator(*vector_cell, cell);
+                    vector_cell++;
+                }
+            }
+            return vector;
+        }
+
+        [[nodiscard]] virtual std::string str() const {
+            const matrix<size_t> widths =
+                    this->map<size_t>([](const Tp& cell) { return (std::stringstream{} << cell).str().size(); });
+            const std::vector<size_t> col_widths =
+                    widths.reduce_cols([](size_t max, size_t width) { return std::max(max, width); });
+            std::stringstream ss;
+            auto widths_row = widths.begin();
+            for (const auto& row : *this) {
+                auto widths_row_cell = widths_row++->begin(),
+                        col_widths_cell = col_widths.begin();
+                for (const auto& cell : row) {
+                    const size_t spaces = *col_widths_cell++ - *widths_row_cell++;
+                    for (int i = 0; i < spaces; i++) ss << ' ';
                     ss << cell << ' ';
                 }
                 ss << '\n';
@@ -97,8 +127,8 @@ namespace gr {
     };
 
     template<typename _Tp>
-    std::ostream& operator<<(std::ostream& __out, const matrix<_Tp>& __matrix) {
-        return __out << __matrix.str();
+    std::ostream& operator<<(std::ostream& out, const matrix<_Tp>& matrix) {
+        return out << matrix.str();
     }
 
 }
